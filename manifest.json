@@ -27,7 +27,11 @@
         "keyword": "DualScreen"
     },
     "web_accessible_resources": [
-        "panel.html"
+        "injected.js",
+        "panel.html",
+        "/images/close.png",
+        "/images/maximise.png",
+        "/images/minimise.png"
     ],
     "content_scripts": [
         {
