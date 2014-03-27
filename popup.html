@@ -1,16 +1,26 @@
 <!doctype html>
 <html>
-    <head>
-        <!-- build:css styles/main.css -->
-        <link href="styles/main.css" rel="stylesheet">
-        <!-- endbuild -->
+<head>
+	<link href="styles/uikit.almost-flat.min.css" rel="stylesheet">
 
-        <!-- build:js scripts/popup.js -->
-        <script src="scripts/jquery-1.11.0.min.js"></script>
-        <script src="scripts/popup.js"></script>
-        <!-- endbuild -->
-    </head>
-    <body>
-    <a href="#" id="show_chat">Show Chat</a>
-    </body>
+	<script src="scripts/jquery-1.11.0.min.js"></script>
+	<script src="scripts/popup.js"></script>
+</head>
+<body>
+<div class="uk-container" style="width: 300px;">
+	<div class="uk-panel">
+		<h3 class="uk-panel-title"><i class="uk-icon-*"></i>Inside Comments</h3>
+		<div class="uk-button-group">
+			<a href="#" class="uk-button uk-button-primary chat_button" data-action="show_chat">Show Comments</a>
+			<a href="#" class="uk-button uk-button-primary chat_button" data-action="hide_chat">Hide Comments</a>
+		</div>
+
+	</div>
+	<article class="uk-article">
+		<hr class="uk-article-divider">
+		<p class="uk-article-meta"><small id="get_quotes"></small></p>
+	</article>
+</div>
+
+</body>
 </html>

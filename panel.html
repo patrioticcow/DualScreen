@@ -1,13 +1,9 @@
 <div id="split_view_titlebar" style="border-bottom: 2px solid #323232;">
-	<a href="#" class="icon_actions action_click" id="action_close">
-		<img src="" id="icon_close" style="width: 16px; height: 16px;" alt="close"/>
-	</a>
-	<a href="#" class="icon_actions action_click" id="action_maximize">
-		<img src="" id="icon_maximize" style="width: 16px; height: 16px;" alt="maximize"/>
-	</a>
-	<a href="#" class="icon_actions action_click" id="action_minimize">
-		<img src="" id="icon_minimize" style="width: 16px; height: 16px;" alt="minimize"/>
-	</a>
+	<a href="#" class="icon_actions action_click" id="action_close"> <img src="" id="icon_close"
+			style="width: 16px; height: 16px;" alt="close"/> </a> <a href="#" class="icon_actions action_click"
+		id="action_maximize"> <img src="" id="icon_maximize" style="width: 16px; height: 16px;" alt="maximize"/> </a> <a
+		href="#" class="icon_actions action_click" id="action_minimize"> <img src="" id="icon_minimize"
+		style="width: 16px; height: 16px;" alt="minimize"/> </a>
 
 	<div style="clear: both"></div>
 </div>
@@ -15,13 +11,25 @@
 
 <style type="text/css">
 	.icon_actions {
-		display : block;
-		float   : right;
-		margin  : 1px;
+		display: block;
+		float: right;
+		margin: 1px;
 	}
 </style>
 
 <script type="text/javascript">
+
+	var contentscript_minimize_chat = localStorage.getItem('contentscript_minimize_chat') && localStorage.getItem('contentscript_minimize_chat') === 'true' ? 'true' : 'false';
+	var contentscript_maximize_chat = localStorage.getItem('contentscript_maximize_chat') && localStorage.getItem('contentscript_maximize_chat') === 'true' ? 'true' : 'false';
+
+	if (contentscript_minimize_chat === 'true') {
+		actionTaken('action_minimize');
+	} else if (contentscript_minimize_chat === 'true') {
+		actionTaken('action_maximize');
+	}
+
+	console.log(contentscript_minimize_chat);
+	console.log(contentscript_maximize_chat);
 
 	$("#split_view_content").resizable({ handles: "w", resize: function (event, ui) {
 		ui.element.css({left: 'none'});
@@ -39,10 +47,16 @@
 		var splitViewContent = document.getElementById('split_view_content');
 
 		if (type === 'action_minimize') {
+			localStorage.setItem('contentscript_open_chat', 'true');
+			localStorage.setItem('contentscript_minimize_chat', 'true');
+			localStorage.setItem('contentscript_maximize_chat', 'false');
 			splitViewContent.style.height = "20px";
 			splitViewContent.style.width = "54px";
 		}
 		if (type === 'action_maximize') {
+			localStorage.setItem('contentscript_open_chat', 'true');
+			localStorage.setItem('contentscript_minimize_chat', 'false');
+			localStorage.setItem('contentscript_maximize_chat', 'true');
 			if (splitViewContent.style.height === '99%') {
 				splitViewContent.style.height = "auto";
 				splitViewContent.style.width = "99%";
@@ -53,6 +67,7 @@
 		}
 		if (type === 'action_close') {
 			splitViewContent.style.display = 'none';
+			localStorage.setItem('contentscript_open_chat', 'false');
 		}
 		if (type === 'action_options') {
 			openWindow(chrome.extension.getURL("/options.html"));
