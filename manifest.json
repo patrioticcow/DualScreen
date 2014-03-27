@@ -10,6 +10,7 @@
     "default_locale": "en",
     "background": {
         "scripts": [
+            "scripts/jquery-ui-1.10.4.custom.min.js",
             "scripts/chromereload.js",
             "scripts/background.js"
         ]
@@ -21,10 +22,6 @@
         },
         "default_title": "DualScreen",
         "default_popup": "popup.html"
-    },
-    "options_page": "options.html",
-    "omnibox": {
-        "keyword": "DualScreen"
     },
     "web_accessible_resources": [
         "injected.js",
@@ -40,10 +37,12 @@
                 "https://*/*"
             ],
             "css": [
+                "styles/ui-darkness/jquery-ui-1.10.4.custom.min.css",
                 "styles/main.css"
             ],
             "js": [
                 "scripts/jquery-1.11.0.min.js",
+                "scripts/jquery-ui-1.10.4.custom.min.js",
                 "scripts/contentscript.js"
             ],
             "run_at": "document_end",
