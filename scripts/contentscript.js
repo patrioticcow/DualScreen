@@ -1,6 +1,5 @@
 'use strict';
 
-var $split_view_content = $('#split_view_content');
 
 var contentscript_open_chat = localStorage.getItem('contentscript_open_chat') ? localStorage.getItem('contentscript_open_chat') : 'false';
 var contentscript_show_chat = contentscript_open_chat === 'true' ? 'display:block;' : 'display:none;';
@@ -34,17 +33,13 @@ chrome.runtime.onConnect.addListener(function (port) {
     }
 });
 
-$(document).ready(function () {
-    $('body').after('<div id="split_view_content"></div>');
-    $split_view_content.attr('style', '').attr('style', orientation + contentscript_show_chat);
+$('body').after('<div id="split_view_content"></div>');
 
-    $split_view_content.load(chrome.extension.getURL("panel.html"), 'key=value', function (k, v) {
-
-    });
+$('#split_view_content').load(chrome.extension.getURL("panel.html"), 'key=value', function (k, v) {
+    $(this).attr('style', '').attr('style', orientation + contentscript_show_chat);
 });
 
 function strpos(haystack, needle, offset) {
     var i = (haystack + '').indexOf(needle, (offset || 0));
     return i === -1 ? false : i;
 }
-
