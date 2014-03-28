@@ -1,6 +1,5 @@
 'use strict';
 
-var windowEvent = localStorage.getItem('closed');
 var port = null;
 
 chrome.tabs.query({}, function (tabs) {
@@ -18,19 +17,13 @@ $(document).ready(function () {
 
     $('.chat_button').on('click', function () {
         var action = $(this).data('action');
-
-        if (windowEvent) {
-            windowEvent = localStorage.setItem('closed', false);
-        }
-        console.log(windowEvent);
-
-        if(port){
+        if (port) {
             port.postMessage({key: action, value: true});
         }
     });
 });
 
-function quotes(){
+function quotes() {
     var quotesArray = [
         'The true sign of intelligence is not knowledge but imagination. Albert Einstein',
         'Information is not knowledge. Albert Einstein',

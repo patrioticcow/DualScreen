@@ -1,9 +1,10 @@
 <div id="split_view_titlebar" style="border-bottom: 2px solid #323232;">
-	<a href="#" class="icon_actions action_click" id="action_close"> <img src="" id="icon_close"
-			style="width: 16px; height: 16px;" alt="close"/> </a> <a href="#" class="icon_actions action_click"
-		id="action_maximize"> <img src="" id="icon_maximize" style="width: 16px; height: 16px;" alt="maximize"/> </a> <a
-		href="#" class="icon_actions action_click" id="action_minimize"> <img src="" id="icon_minimize"
-		style="width: 16px; height: 16px;" alt="minimize"/> </a>
+	<a href="#" class="icon_actions action_click" id="action_close">
+		<img src="" id="icon_close" style="width: 16px; height: 16px;" alt="close"/> </a>
+	<a href="#" class="icon_actions action_click" id="action_maximize">
+		<!--img src="" id="icon_maximize" style="width: 16px; height: 16px;" alt="maximize"/--> </a>
+	<a href="#" class="icon_actions action_click" id="action_minimize">
+		<!--img src="" id="icon_minimize" style="width: 16px; height: 16px;" alt="minimize"/--> </a>
 
 	<div style="clear: both"></div>
 </div>
@@ -21,15 +22,14 @@
 
 	var contentscript_minimize_chat = localStorage.getItem('contentscript_minimize_chat') && localStorage.getItem('contentscript_minimize_chat') === 'true' ? 'true' : 'false';
 	var contentscript_maximize_chat = localStorage.getItem('contentscript_maximize_chat') && localStorage.getItem('contentscript_maximize_chat') === 'true' ? 'true' : 'false';
+	var action_minimize = $('#action_minimize');
+	var action_maximize = $('#action_maximize');
 
 	if (contentscript_minimize_chat === 'true') {
 		actionTaken('action_minimize');
-	} else if (contentscript_minimize_chat === 'true') {
+	} else if (contentscript_maximize_chat === 'true') {
 		actionTaken('action_maximize');
 	}
-
-	console.log(contentscript_minimize_chat);
-	console.log(contentscript_maximize_chat);
 
 	$("#split_view_content").resizable({ handles: "w", resize: function (event, ui) {
 		ui.element.css({left: 'none'});
@@ -47,6 +47,8 @@
 		var splitViewContent = document.getElementById('split_view_content');
 
 		if (type === 'action_minimize') {
+			action_minimize.hide();
+			action_maximize.show();
 			localStorage.setItem('contentscript_open_chat', 'true');
 			localStorage.setItem('contentscript_minimize_chat', 'true');
 			localStorage.setItem('contentscript_maximize_chat', 'false');
@@ -54,12 +56,15 @@
 			splitViewContent.style.width = "54px";
 		}
 		if (type === 'action_maximize') {
+			action_minimize.show();
+			action_maximize.hide();
 			localStorage.setItem('contentscript_open_chat', 'true');
 			localStorage.setItem('contentscript_minimize_chat', 'false');
 			localStorage.setItem('contentscript_maximize_chat', 'true');
 			if (splitViewContent.style.height === '99%') {
 				splitViewContent.style.height = "auto";
 				splitViewContent.style.width = "99%";
+				splitViewContent.style.right = "0";
 			} else {
 				splitViewContent.style.height = "99%";
 				splitViewContent.style.width = "auto";
@@ -81,10 +86,10 @@
 
 	var closeIconImage = document.getElementById("icon_close");
 	closeIconImage.setAttribute('src', closeIcon);
-	var maxIconImage = document.getElementById("icon_maximize");
-	maxIconImage.setAttribute('src', maxIcon);
-	var minIconImage = document.getElementById("icon_minimize");
-	minIconImage.setAttribute('src', minIcon);
+	//var maxIconImage = document.getElementById("icon_maximize");
+	//maxIconImage.setAttribute('src', maxIcon);
+	//var minIconImage = document.getElementById("icon_minimize");
+	//minIconImage.setAttribute('src', minIcon);
 
 	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
 	var disqus_shortname = 'answersingenesis'; // required: replace example with your forum shortname
