@@ -1,8 +1,8 @@
 {
-    "name": "Obiter",
-    "version": "0.1.1",
+    "name": "Dictum",
+    "version": "0.9.0",
     "manifest_version": 2,
-    "description": "Obiter Inside Comments",
+    "description": "Dictum Inside Comments",
     "icons": {
         "16": "images/icon-16.png",
         "128": "images/icon-128.png"
@@ -20,7 +20,7 @@
             "19": "images/icon-19.png",
             "38": "images/icon-38.png"
         },
-        "default_title": "Obiter Inside Comments",
+        "default_title": "Dictum Inside Comments",
         "default_popup": "popup.html"
     },
     "web_accessible_resources": [
