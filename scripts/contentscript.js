@@ -1,18 +1,16 @@
 'use strict';
-
-
 var contentscript_open_chat = localStorage.getItem('contentscript_open_chat') ? localStorage.getItem('contentscript_open_chat') : 'false';
 var contentscript_show_chat = contentscript_open_chat === 'true' ? 'display:block;' : 'display:none;';
-
-var horizontal = "position: fixed;width: 99%;right: 0;bottom: 0;background: #FFF;z-index: 10000;padding: 5px;border-top: 5px solid #737E85;";
-var vertical = "position: fixed;height: 99%;right: 0;bottom: 0;background: #FFF;z-index: 10000;padding: 7px;border-left: 5px solid #737E85;";
+var horizontal = "position: fixed;width: 300px;height:100%;right: 0;bottom: 0;background: #FFF;z-index: 10000;padding: 5px;border-left: 5px solid #737E85;";
+var vertical = "height: 300px; width:100%; position: fixed;right: 0;bottom: 0;background: #FFF;z-index: 10000;padding: 7px;border-top: 5px solid #737E85;";
 var orientationOrig = localStorage.getItem('contentscript_orientation');
 var orientation = orientationOrig === 'vertical' ? vertical : horizontal;
-console.log(orientationOrig);
-console.log(orientation);
+
 chrome.runtime.onConnect.addListener(function (port) {
     if (port.name == "DISQUS_CONTENTSCRIPT") {
         port.onMessage.addListener(function (msg) {
+            var $split_view_content = $('#split_view_content');
+
             if (msg.key == 'show_chat') {
                 $split_view_content.show();
                 localStorage.setItem('contentscript_open_chat', true);

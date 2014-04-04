@@ -1,6 +1,6 @@
 <div id="split_view_titlebar" style="border-bottom: 2px solid #323232;">
 	<a href="#" class="icon_actions action_click" id="action_close">
-		<img src="" id="icon_close" style="width: 16px; height: 16px;" alt="close"/> </a>
+		<!--img src="" id="icon_close" style="width: 16px; height: 16px;" alt="close"/--> </a>
 	<a href="#" class="icon_actions action_click" id="action_maximize">
 		<!--img src="" id="icon_maximize" style="width: 16px; height: 16px;" alt="maximize"/--> </a>
 	<a href="#" class="icon_actions action_click" id="action_minimize">
@@ -19,7 +19,7 @@
 </style>
 
 <script type="text/javascript">
-
+	var $split_view_content = $("#split_view_content");
 	var contentscript_minimize_chat = localStorage.getItem('contentscript_minimize_chat') && localStorage.getItem('contentscript_minimize_chat') === 'true' ? 'true' : 'false';
 	var contentscript_maximize_chat = localStorage.getItem('contentscript_maximize_chat') && localStorage.getItem('contentscript_maximize_chat') === 'true' ? 'true' : 'false';
 	var action_minimize = $('#action_minimize');
@@ -31,8 +31,12 @@
 		actionTaken('action_maximize');
 	}
 
-	$("#split_view_content").resizable({ handles: "w", resize: function (event, ui) {
-		ui.element.css({left: 'none'});
+	$split_view_content.resizable({ handles: "n, w", resize: function (event, ui) {
+		if ($split_view_content.css('border-left') === '0px none rgb(0, 0, 0)') {
+			ui.element.css({top: 'none'});
+		} else {
+			ui.element.css({left: 'none'});
+		}
 	}, start: function (event, ui) {
 		$('iframe').css('pointer-events', 'none');
 	}, stop: function (event, ui) {
@@ -84,8 +88,8 @@
 	var maxIcon = chrome.extension.getURL("/images/maximise.png");
 	var minIcon = chrome.extension.getURL("/images/minimise.png");
 
-	var closeIconImage = document.getElementById("icon_close");
-	closeIconImage.setAttribute('src', closeIcon);
+	//var closeIconImage = document.getElementById("icon_close");
+	//closeIconImage.setAttribute('src', closeIcon);
 	//var maxIconImage = document.getElementById("icon_maximize");
 	//maxIconImage.setAttribute('src', maxIcon);
 	//var minIconImage = document.getElementById("icon_minimize");
@@ -142,5 +146,5 @@
 	}
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-</noscript><a href="http://disqus.com" class="dsq-brlink">comments powered by <span
-		class="logo-disqus">Disqus</span></a>
+</noscript><a href="http://disqus.com" class="dsq-brlink">comments powered by
+	<span class="logo-disqus">Disqus</span></a>
