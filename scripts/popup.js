@@ -1,29 +1,7 @@
 'use strict';
 
-var port = null;
-
-function setPort() {
-	chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-		console.log(tabs);
-		port = chrome.tabs.connect(tabs[0].id, {name: "DISQUS_CONTENTSCRIPT"});
-
-		//for (var i = 0; i < tabs.length; i++) {}
-	});
-}
-
-setPort();
-
 $(document).ready(function () {
 	$('#get_quotes').html(quotes());
-
-	$('.chat_button').on('click', function () {
-		var action = $(this).data('action');
-		setPort();
-		console.log(port);
-		if (port) {
-			port.postMessage({key: action, value: true});
-		}
-	});
 });
 
 function quotes() {

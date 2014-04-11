@@ -1,34 +1,36 @@
 {
     "name": "Dictum",
-    "version": "0.9.0",
+    "version": "0.4.1",
     "manifest_version": 2,
     "description": "Dictum Inside Comments",
     "icons": {
         "16": "images/icon-16.png",
+        "19": "images/icon-19.png",
+        "38": "images/icon-38.png",
+        "64": "images/icon-64.png",
         "128": "images/icon-128.png"
     },
     "default_locale": "en",
     "background": {
         "scripts": [
+            "scripts/jquery-1.11.0.min.js",
             "scripts/jquery-ui-1.10.4.custom.min.js",
-            "scripts/chromereload.js",
             "scripts/background.js"
         ]
     },
     "browser_action": {
         "default_icon": {
+            "16": "images/icon-16.png",
             "19": "images/icon-19.png",
-            "38": "images/icon-38.png"
+            "38": "images/icon-38.png",
+            "64": "images/icon-64.png",
+            "128": "images/icon-128.png"
         },
         "default_title": "Dictum Inside Comments",
         "default_popup": "popup.html"
     },
     "web_accessible_resources": [
-        "injected.js",
-        "panel.html",
-        "/images/close.png",
-        "/images/maximise.png",
-        "/images/minimise.png"
+        "panel.html"
     ],
     "content_scripts": [
         {
@@ -53,6 +55,7 @@
         "tabs",
         "history",
         "management",
+        "contextMenus",
         "http://*/*",
         "https://*/*"
     ]
